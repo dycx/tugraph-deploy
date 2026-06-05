@@ -16,10 +16,12 @@
 Thumbs.db
 
 # Build artifacts
-*.tar.gz
-*.rpm
 *.class
 *.log
+
+# Generated full tar.gz (keep only split parts in git)
+offline/tugraph-offline-centos7-v4.5.2.tar.gz
+offline/tugraph-4.5.2-1.el7.x86_64.rpm
 
 # Temporary
 tmp/

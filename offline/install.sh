@@ -6,12 +6,28 @@
 #   方式1 (推荐): chmod +x install.sh && sudo ./install.sh
 #   方式2: sudo bash install.sh
 #
-# 此脚本需要与 RPM 包放在同一目录下
+# 此脚本需要与分片文件及依赖 RPM 放在同一目录下
+# 如果存在分片文件 (*.partaa), 自动合并后再安装
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
+
+# 如果存在分片, 先合并为完整 tar.gz
+if ls tugraph-offline-centos7-v4.5.2.tar.gz.part* 1>/dev/null 2>&1; then
+    echo "检测到分片文件, 正在合并..."
+    cat tugraph-offline-centos7-v4.5.2.tar.gz.part* > tugraph-offline-centos7-v4.5.2.tar.gz
+    echo "合并完成 ($(du -h tugraph-offline-centos7-v4.5.2.tar.gz | cut -f1))"
+fi
+
+# 从 tar.gz 中解压 TuGraph RPM
+if [ -f tugraph-offline-centos7-v4.5.2.tar.gz ]; then
+    echo "解压 TuGraph RPM..."
+    tar xzf tugraph-offline-centos7-v4.5.2.tar.gz tugraph-offline/tugraph-4.5.2-1.el7.x86_64.rpm
+    mv tugraph-offline/tugraph-4.5.2-1.el7.x86_64.rpm .
+    rm -rf tugraph-offline
+fi
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
