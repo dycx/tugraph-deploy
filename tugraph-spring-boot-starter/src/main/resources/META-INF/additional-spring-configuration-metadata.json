@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "tugraph",
+      "type": "com.tugraph.starter.TuGraphProperties",
+      "sourceType": "com.tugraph.starter.TuGraphProperties"
+    }
+  ],
+  "properties": [
+    { "name": "tugraph.url", "type": "java.lang.String", "defaultValue": "http://tugraph-db:7070" },
+    { "name": "tugraph.username", "type": "java.lang.String", "defaultValue": "admin" },
+    { "name": "tugraph.password", "type": "java.lang.String" },
+    { "name": "tugraph.bolt-url", "type": "java.lang.String", "defaultValue": "bolt://tugraph-db:7687" },
+    { "name": "tugraph.default-graph", "type": "java.lang.String", "defaultValue": "default" },
+    { "name": "tugraph.max-retries", "type": "java.lang.Integer", "defaultValue": "3" }
+  ]
+}
