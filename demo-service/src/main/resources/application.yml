@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: tugraph-demo-service
+
+# ────── TuGraph connection ──────
+# In production, these come from K8s ConfigMap + Secret
+tugraph:
+  url: http://tugraph-db:7070
+  username: admin
+  password: ${TUGRAPH_PASSWORD:73@TuGraph}    # override via env / K8s Secret
+  bolt-url: bolt://tugraph-db:7687
+  default-graph: default
+  max-retries: 3
+
+# Actuator for K8s probes
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
